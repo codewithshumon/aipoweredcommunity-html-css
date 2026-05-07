@@ -1,0 +1,3505 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      AI Powered Community - Building a Flourishing Economy Together
+    </title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+    />
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bright-red: #ff0000;
+    --bright-white: #ffffff;
+    --ligh-gray-bg: #6b7280;
+    --black-bg: #000000;
+    --black-border: #000000;
+    --gray-border: #374151;
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --primary-color: #667eea;
+    --success-color: #10b981;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-colored: 0 10px 40px rgba(102, 126, 234, 0.3);
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-2xl: 4rem;
+    --font-primary: 'Inter', sans-serif;
+    --font-heading: 'Poppins', sans-serif;
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+
+    /* Player colors (pulled from site palette) */
+    --player-primary: #667eea;
+    --player-accent:  #ff0000;
+    --player-bg:      #000000;
+    --player-card:    #111111;
+    --player-text:    #ffffff;
+    --player-muted:   #9494b8;
+}
+
+html { scroll-behavior: smooth; background-color: #6b7280; }
+
+body {
+    font-family: var(--font-primary);
+    color: var(--bright-white);
+    line-height: 1.6;
+    background-color: var(--ligh-gray-bg);
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* NAVIGATION */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--black-bg);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+}
+
+.navbar.scrolled { box-shadow: var(--shadow-md); }
+
+.navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: var(--spacing-sm) var(--spacing-md);
+    gap: 2rem;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: transform var(--transition-fast);
+}
+
+.nav-brand:hover { transform: translateY(-2px); }
+
+.logo-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--bright-red);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+}
+
+.nav-brand:hover .logo-icon {
+    transform: rotate(5deg) scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+.logo-icon i {
+    font-size: 1.6rem;
+    color: white;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.logo-main {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--bright-white);
+    letter-spacing: -0.5px;
+}
+
+.logo-sub {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--bright-white);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: -2px;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: auto;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--bright-white);
+    font-weight: 700;
+    padding: 0.4rem 0.75rem;
+    border-radius: 8px;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+    font-size: 0.9rem;
+}
+
+.nav-link:hover {
+    color: var(--bright-red);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-members {
+    background: var(--bright-red);
+    color: white !important;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: 25px;
+    font-weight: 700;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-members:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    background: #cc0000;
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--bright-white);
+    border-radius: 3px;
+    transition: all var(--transition-fast);
+}
+
+/* DROPDOWN MENUS */
+.nav-item-dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dropdown-toggle i {
+    font-size: 0.7rem;
+    transition: transform var(--transition-fast);
+}
+
+.nav-item-dropdown:hover .dropdown-toggle i {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 180px;
+    background: var(--black-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow-xl);
+    padding: 0.5rem 0;
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all var(--transition-fast);
+    z-index: 1001;
+    border: 2px solid var(--gray-border);
+}
+
+.nav-item-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-link {
+    display: block;
+    padding: 0.6rem 1rem;
+    color: var(--bright-white);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+.dropdown-link:hover {
+    color: var(--bright-red);
+    background: rgba(255, 255, 255, 0.1);
+    padding-left: 1.3rem;
+}
+
+/* HERO SECTION */
+.hero {
+    position: relative;
+    min-height: auto;
+    display: flex;
+    align-items: center;
+    padding: 100px 0 var(--spacing-2xl) 0;
+    background: var(--black-bg);
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 1500px;
+    margin: 0 auto;
+    text-align: center;
+    background: var(--black-bg);
+    padding: var(--spacing-xs);
+    border-radius: 25px;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: var(--spacing-xs);
+    margin-top: var(--spacing-md);
+    color: var(--bright-red);
+    padding: var(--spacing-sm);
+    display: inline-block;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.2rem, 1.4rem);
+    color: var(--bright-white);
+    margin-bottom: var(--spacing-lg);
+    font-weight: 700;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    color: var(--bright-white);
+    line-height: 1.8;
+    font-weight: 700;
+}
+
+/* SECTIONS */
+section {
+    padding: var(--spacing-md) 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--bright-red);
+    margin-bottom: var(--spacing-md);
+    background: var(--black-bg);
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: 15px;
+    display: inline-block;
+    box-shadow: var(--shadow-lg);
+    border: 3px solid var(--black-border);
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: var(--bright-white);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+    font-weight: 700;
+}
+
+/* ABOUT SECTION */
+.about { background: var(--black-bg); }
+
+.about-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.detail-row {
+    background: var(--black-bg);
+    padding: var(--spacing-xl);
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+}
+
+.detail-row:hover { box-shadow: var(--shadow-lg); }
+
+.detail-content {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: flex-start;
+}
+
+.detail-text h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--bright-red);
+    font-weight: 700;
+}
+
+.detail-text p {
+    color: var(--bright-white);
+    line-height: 1.8;
+    font-weight: 700;
+}
+
+/* AFFILIATES SECTION */
+.affiliates { background: var(--black-bg); }
+
+.affiliates-header {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.affiliates-benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.benefit-card {
+    background: var(--black-bg);
+    padding: var(--spacing-xl);
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+    border: 3px solid var(--black-border);
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+.benefit-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--bright-red);
+    font-weight: 700;
+}
+
+.benefit-card p {
+    color: var(--bright-white);
+    line-height: 1.8;
+    font-weight: 700;
+}
+
+.cta-section {
+    text-align: center;
+    background: var(--black-bg);
+    padding: var(--spacing-2xl);
+    border-radius: 25px;
+    border: 3px solid var(--black-border);
+}
+
+.cta-section h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--bright-red);
+    font-weight: 700;
+}
+
+.cta-section p {
+    color: var(--bright-white);
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-lg);
+    font-weight: 700;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all var(--transition-normal);
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--primary-gradient);
+    color: white;
+    box-shadow: var(--shadow-colored);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 50px rgba(102, 126, 234, 0.5);
+}
+
+.btn-large {
+    padding: var(--spacing-md) var(--spacing-2xl);
+    font-size: 1.2rem;
+}
+
+/* VIDEO SECTION */
+.video-section { background: var(--black-bg); }
+
+.video-container {
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.video-container.animate-on-scroll {
+    background-color: transparent;
+    border-radius: 0;
+    padding: 0;
+}
+
+/* BOTTOM SECTIONS */
+.bottom-sections {
+    background: var(--black-bg);
+    padding: var(--spacing-2xl) 0;
+}
+
+.bottom-card {
+    background: var(--black-bg);
+    padding: var(--spacing-xl);
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: var(--spacing-lg);
+    border: 3px solid var(--black-border);
+}
+
+.bottom-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--bright-red);
+    font-weight: 700;
+}
+
+.bottom-card p {
+    color: var(--bright-white);
+    line-height: 1.8;
+    font-weight: 700;
+}
+
+.bottom-card .message-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.bottom-card .ceo-avatar {
+    width: 70px;
+    height: 70px;
+    background: var(--primary-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-colored);
+    flex-shrink: 0;
+}
+
+.bottom-card .ceo-avatar i {
+    font-size: 2rem;
+    color: white;
+}
+
+.bottom-card .ceo-info h3 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--bright-red);
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+
+.bottom-card .ceo-info p {
+    color: var(--bright-white);
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.bottom-card .message-content {
+    position: relative;
+    padding-left: var(--spacing-lg);
+}
+
+.bottom-card .quote-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 2rem;
+    color: var(--primary-color);
+    opacity: 0.3;
+}
+
+.bottom-card .message-content p {
+    color: var(--bright-white);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    font-style: italic;
+    font-weight: 700;
+}
+
+/* FOOTER */
+.footer {
+    background: #000000;
+    color: white;
+    padding: var(--spacing-md) 0;
+    border-top: 5px solid var(--black-border);
+    width: 100%;
+    margin-top: auto;
+}
+
+.footer-bottom {
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: var(--bright-white);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        flex-direction: column;
+        background: var(--black-bg);
+        box-shadow: var(--shadow-lg);
+        padding: var(--spacing-lg);
+        transition: left var(--transition-normal);
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+    }
+
+    .nav-menu.active { left: 0; }
+    .nav-toggle { display: flex; }
+
+    .nav-item-dropdown { width: 100%; }
+
+    .dropdown-toggle {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+        padding-left: 1.5rem;
+        margin-top: 0.25rem;
+        min-width: auto;
+    }
+
+    .dropdown-link {
+        padding: 0.5rem 0;
+        color: var(--text-secondary);
+    }
+
+    .dropdown-link:hover {
+        background: transparent;
+        padding-left: 0;
+        color: var(--bright-red);
+    }
+
+    .affiliates-benefits,
+    .detail-content {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --spacing-xl: 2rem;
+        --spacing-2xl: 3rem;
+    }
+
+    .hero-title { font-size: 2rem; }
+    .section-title { font-size: 1.8rem; }
+}
+
+
+/* =====================================================
+   CUSTOM VIDEO PLAYER
+   ===================================================== */
+
+.apc-player {
+    position: relative;
+    width: 100%;
+    background: #000;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+    /* Aspect ratio container */
+    aspect-ratio: 16 / 9;
+}
+
+/* Red + purple gradient glow border */
+.apc-player::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 2px;
+    /* background: linear-gradient(135deg, #ff0000, #667eea, transparent 65%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude; */
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* VIDEO ELEMENT */
+.apc-player video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+}
+
+/* BIG PLAY OVERLAY */
+.apc-play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.25s;
+    z-index: 5;
+}
+
+.apc-play-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.apc-big-play {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #ff0000, #667eea);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.9rem;
+    color: #fff;
+    box-shadow: 0 0 40px rgba(255, 0, 0, 0.5), 0 0 80px rgba(102, 126, 234, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.apc-big-play:hover {
+    box-shadow: 0 0 60px rgba(255, 0, 0, 0.7), 0 0 100px rgba(102, 126, 234, 0.4);
+}
+
+.apc-big-play i { margin-left: 4px; }
+
+/* CONTROLS BAR */
+.apc-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 28px 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 6;
+}
+
+.apc-player.idle .apc-controls {
+    opacity: 0;
+    transform: translateY(6px);
+}
+
+/* PROGRESS / SEEK BAR */
+.apc-progress-wrap {
+    position: relative;
+    height: 5px;
+    cursor: pointer;
+    transition: height 0.15s;
+}
+
+.apc-progress-wrap:hover {
+    height: 7px;
+}
+
+.apc-progress-wrap:hover .apc-progress-thumb {
+    opacity: 1;
+}
+
+.apc-progress-bg {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 99px;
+    overflow: visible;
+    position: relative;
+}
+
+.apc-buffered {
+    position: absolute;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 99px;
+    width: 0%;
+    transition: width 0.4s linear;
+}
+
+.apc-played {
+    position: absolute;
+    height: 100%;
+    background: linear-gradient(90deg, #ff0000, #667eea);
+    border-radius: 99px;
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+.apc-progress-thumb {
+    position: absolute;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 8px #ff0000;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.15s;
+    pointer-events: none;
+}
+
+.apc-progress-thumb.dragging {
+    transform: translate(-50%, -50%) scale(1.3);
+    opacity: 1;
+}
+
+/* BOTTOM ROW */
+.apc-bottom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Control buttons */
+.apc-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: color 0.15s, background 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.apc-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.apc-btn i { font-size: 1rem; }
+
+/* Time display */
+.apc-time {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.6);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+}
+
+.apc-time span { color: #fff; }
+
+/* Volume group */
+.apc-volume-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.apc-volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 72px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 99px;
+    outline: none;
+    cursor: pointer;
+    accent-color: #667eea;
+    transition: width 0.2s;
+}
+
+.apc-volume-slider:hover { width: 90px; }
+
+.apc-volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff0000;
+    cursor: pointer;
+}
+
+/* Speed badge */
+.apc-speed {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #667eea;
+    background: rgba(102, 126, 234, 0.15);
+    border: 1px solid rgba(102, 126, 234, 0.35);
+    border-radius: 5px;
+    padding: 2px 7px;
+    cursor: pointer;
+    transition: background 0.15s;
+    white-space: nowrap;
+}
+
+.apc-speed:hover { background: rgba(102, 126, 234, 0.3); }
+
+/* Speed dropdown */
+.apc-speed-menu {
+    position: absolute;
+    bottom: 56px;
+    right: 52px;
+    background: #111;
+    border: 1px solid rgba(102, 126, 234, 0.35);
+    border-radius: 10px;
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    z-index: 20;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+    min-width: 90px;
+}
+
+.apc-speed-menu.open { display: flex; }
+
+.apc-speed-opt {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.15s;
+    text-align: center;
+}
+
+.apc-speed-opt:hover { background: rgba(102, 126, 234, 0.25); }
+.apc-speed-opt.active { color: #ff0000; font-weight: 700; }
+
+/* Spacer */
+.apc-spacer { flex: 1; }
+
+/* Loading spinner */
+.apc-spinner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 7;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.apc-spinner.visible { opacity: 1; }
+
+.apc-spinner-ring {
+    width: 44px;
+    height: 44px;
+    border: 3px solid rgba(255, 0, 0, 0.2);
+    border-top-color: #ff0000;
+    border-radius: 50%;
+    animation: apcSpin 0.7s linear infinite;
+}
+
+@keyframes apcSpin { to { transform: rotate(360deg); } }
+
+/* Seek flash feedback */
+.apc-seek-flash {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 0, 0, 0.3);
+    color: #fff;
+    font-size: 1.5rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 8;
+}
+
+.apc-seek-flash.left  { left: 18%; }
+.apc-seek-flash.right { right: 18%; }
+.apc-seek-flash.show  { opacity: 1; }
+
+/* RESPONSIVE */
+@media (max-width: 520px) {
+    .apc-volume-slider { display: none; }
+    .apc-speed         { display: none; }
+    .apc-time          { font-size: 0.7rem; }
+    .apc-big-play      { width: 60px; height: 60px; font-size: 1.4rem; }
+}
+
+/* Gradient Text */
+.gradient-text {
+    background: linear-gradient(135deg, #ff0000, #667eea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.gradient-text strong {
+    color: var(--bright-red);
+    -webkit-text-fill-color: var(--bright-red);
+}
+
+/* ============================================
+   MODERN ANIMATIONS & ENHANCED DESIGN
+   ============================================ */
+
+/* Scroll Animation Base */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animation Delays */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
+.delay-500 { transition-delay: 0.5s; }
+
+/* Hero Section Enhanced */
+.hero {
+    position: relative;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    background: transparent !important;
+    overflow: hidden;
+    padding-top: 150px;
+}
+
+.hero-content {
+    width: 1000px;
+    height: 480px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: var(--spacing-md);
+    color: var(--bright-red);
+    padding: var(--spacing-sm);
+    display: inline-block;
+    animation: heroTitlePulse 3s ease-in-out infinite;
+    background: linear-gradient(135deg, #ff0000 0%, #ff0000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    /* text-shadow: 0 0 60px rgba(255, 0, 0, 0.5); */
+    white-space: nowrap;
+}
+
+@keyframes heroTitlePulse {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.2); }
+}
+
+.hero-subtitle {
+    font-size: 1.8rem;
+    color: var(--bright-white);
+    margin-bottom: var(--spacing-lg);
+    font-weight: 600;
+    animation: fadeInUp 1s ease 0.3s both;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap;
+}
+
+.hero-description {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.8;
+    font-weight: 500;
+    animation: fadeInUp 1s ease 0.5s both;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Scroll Down Indicator */
+.scroll-indicator {
+    margin-top: 50px;
+    animation: fadeInUp 1s ease 0.8s both;
+    cursor: pointer;
+}
+
+.scroll-indicator span {
+    display: block;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+.scroll-indicator .mouse {
+    width: 28px;
+    height: 46px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 14px;
+    margin: 0 auto;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.scroll-indicator .mouse:hover {
+    border-color: var(--bright-red);
+    transform: scale(1.1);
+}
+
+.scroll-indicator .wheel {
+    width: 4px;
+    height: 8px;
+    background: var(--bright-red);
+    border-radius: 2px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scrollWheel 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollWheel {
+    0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(15px); }
+}
+
+/* Floating particles effect */
+.hero-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(102, 126, 234, 0.6);
+    border-radius: 50%;
+    animation: float 15s infinite;
+}
+
+.particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+.particle:nth-child(2) { left: 20%; animation-delay: 2s; background: rgba(255, 0, 0, 0.6); }
+.particle:nth-child(3) { left: 30%; animation-delay: 4s; }
+.particle:nth-child(4) { left: 40%; animation-delay: 1s; background: rgba(118, 75, 162, 0.6); }
+.particle:nth-child(5) { left: 50%; animation-delay: 3s; }
+.particle:nth-child(6) { left: 60%; animation-delay: 5s; background: rgba(255, 0, 0, 0.6); }
+.particle:nth-child(7) { left: 70%; animation-delay: 2.5s; }
+.particle:nth-child(8) { left: 80%; animation-delay: 4.5s; background: rgba(102, 126, 234, 0.6); }
+.particle:nth-child(9) { left: 90%; animation-delay: 1.5s; }
+.particle:nth-child(10) { left: 95%; animation-delay: 3.5s; background: rgba(118, 75, 162, 0.6); }
+
+@keyframes float {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+}
+
+/* Enhanced Section Headers */
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    animation: fadeInUp 0.8s ease both;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--bright-red);
+    margin-bottom: var(--spacing-md);
+    background: var(--black-bg);
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: 15px;
+    display: inline-block;
+    box-shadow: var(--shadow-lg);
+    border: 3px solid var(--black-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.section-subtitle {
+    font-size: 1.25rem;
+    color: var(--bright-white);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+    font-weight: 500;
+}
+
+/* About Section Enhanced */
+.about { 
+    background: #6B7280;
+    position: relative;
+}
+
+.about::before {
+    display: none;
+}
+
+/* Enhanced Video Container */
+.video-container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.apc-player {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 3px solid rgba(102, 126, 234, 0.3);
+    transition: all 0.4s ease;
+}
+
+.apc-player:hover {
+    border-color: var(--bright-red);
+}
+
+/* Enhanced Benefit Cards */
+.affiliates { 
+    background: #6B7280;
+    position: relative;
+}
+
+.affiliates::before {
+    display: none;
+}
+
+.affiliates-benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: var(--spacing-xl);
+}
+
+.benefit-card {
+    background: #000000;
+    padding: 40px 35px;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.benefit-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ff0000, #667eea, #764ba2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+.benefit-card:hover::before {
+    opacity: 1;
+}
+
+.benefit-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--bright-red);
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+}
+
+.benefit-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff0000, #667eea);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.benefit-card:hover h3::after {
+    width: 80px;
+}
+
+.benefit-card p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.85;
+    font-weight: 500;
+    font-size: 1.05rem;
+}
+
+/* Enhanced CTA Section */
+.cta-section {
+    text-align: center;
+    background: #000000;
+    padding: 50px 40px;
+    border-radius: 24px;
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease 0.3s both;
+    margin-bottom: 0;
+}
+
+.cta-section::before {
+    display: none;
+}
+
+@keyframes ctaGlow {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.cta-section h3 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--bright-red);
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+
+.cta-section p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.15rem;
+    margin-bottom: 0;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+}
+
+.cta-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: left;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-list li {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.05rem;
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+}
+
+.cta-list li::before {
+    content: "•";
+    color: var(--bright-red);
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
+}
+
+/* Video Section Enhanced */
+.video-section {
+    background: #6B7280;
+    position: relative;
+    padding: 30px 0;
+}
+
+.video-section::before {
+    display: none;
+}
+
+/* Enhanced Bottom Section */
+.bottom-sections {
+    background: #6B7280;
+    padding: 80px 0;
+    position: relative;
+}
+
+.bottom-sections::before {
+    display: none;
+}
+
+.bottom-card {
+    background: #000000;
+    border-radius: 24px;
+    padding: 45px;
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease both;
+}
+
+.bottom-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ff0000, #667eea, #764ba2);
+}
+
+.bottom-card .message-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.bottom-card .ceo-avatar {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.bottom-card .ceo-avatar i {
+    font-size: 2.2rem;
+    color: white;
+}
+
+.bottom-card .ceo-info h3 {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    color: var(--bright-red);
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.bottom-card .ceo-info p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.bottom-card .message-content {
+    position: relative;
+    padding-left: 35px;
+}
+
+.bottom-card .quote-icon {
+    position: absolute;
+    top: -10px;
+    left: 0;
+    font-size: 1.8rem;
+    color: rgba(102, 126, 234, 0.6);
+}
+
+.bottom-card .message-content p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.9;
+    font-size: 1.1rem;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.bottom-card .cta-link {
+    display: block;
+    margin-top: 25px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.bottom-card .cta-link:hover {
+    transform: translateX(5px);
+}
+
+/* Footer Enhanced */
+
+/* Navbar Enhanced */
+.navbar {
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.navbar.scrolled {
+    background: rgba(10, 10, 10, 0.98);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+
+.padding-x-max {
+    padding: 0 200px;
+}
+
+.padding-top-md {
+    padding-top: 100px;
+}
+
+.padding-top-sm {
+    padding-top: 50px;
+}
+
+.padding-top-xs {
+    padding-top: 30px;
+}
+
+.padding-top-xxs {
+    padding-top: 10px;
+}
+
+.padding-bottom-sm {
+    padding-bottom: 40px;
+}
+
+.padding-bottom-xs {
+    padding-bottom: 20px;
+}
+
+
+.margin-top-md {
+    margin-top: 100px;
+}
+
+.center-note-text {
+    color: #ffffff;
+    font-size: 1rem;
+    text-align: center;
+    position: relative;
+    font-weight: 500;
+}
+
+.center-bold-text {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 800;
+    text-align: center;
+    position: relative;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+    .hero {
+        height: auto !important;
+        min-height: 100vh;
+        padding: 120px 20px 60px 20px !important;
+    }
+    
+    .hero-content {
+        padding: 30px 20px !important;
+        width: 100% !important;
+    }
+    
+    .hero-title {
+        font-size: clamp(1.5rem, 6vw, 2.5rem) !important;
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(1rem, 4vw, 1.5rem) !important;
+    }
+    
+    .hero-description {
+        font-size: clamp(0.9rem, 3vw, 1.1rem) !important;
+    }
+    
+    .scroll-indicator {
+        margin-top: 30px;
+    }
+    
+    .benefit-card {
+        padding: 30px 25px;
+    }
+    
+    .bottom-card {
+        padding: 30px 25px;
+    }
+    
+    .bottom-card .message-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .bottom-card .message-content {
+        padding-left: 0;
+        text-align: center;
+    }
+    
+    .bottom-card .quote-icon {
+        position: static;
+        display: block;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+}
+
+/* ============================================
+   COMPREHENSIVE MOBILE RESPONSIVE STYLES
+   ============================================ */
+
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 20px;
+    }
+    
+    section {
+        padding: 60px 0;
+    }
+    
+    .section-title {
+        font-size: clamp(1.5rem, 4vw, 2.2rem);
+        padding: 15px 25px;
+    }
+    
+    .affiliates-benefits {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .cta-section {
+        padding: 40px 30px;
+    }
+    
+    .cta-section h3 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Large Mobile (480px - 767px) */
+@media (max-width: 767px) {
+    :root {
+        --spacing-lg: 1.5rem;
+        --spacing-xl: 2rem;
+        --spacing-2xl: 2.5rem;
+    }
+    
+    body {
+        font-size: 16px;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    section {
+        padding: 50px 0;
+    }
+    
+    /* Navigation */
+    .navbar .container {
+        padding: 10px 15px;
+    }
+    
+    .nav-brand {
+        gap: 8px;
+    }
+    
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .logo-text .logo-main {
+        font-size: 1.1rem;
+    }
+    
+    .logo-text .logo-sub {
+        font-size: 0.85rem;
+    }
+    
+    /* Hero */
+    .hero {
+        padding: 100px 0 60px 0;
+        min-height: auto;
+    }
+    
+    .hero-title {
+        font-size: clamp(1.8rem, 10vw, 2.5rem);
+        padding: 10px;
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(1rem, 4vw, 1.4rem);
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+    
+    .scroll-indicator {
+        margin-top: 35px;
+    }
+    
+    .scroll-indicator span {
+        font-size: 0.75rem;
+    }
+    
+    /* Section Headers */
+    .section-header {
+        margin-bottom: 40px;
+    }
+    
+    .section-title {
+        font-size: clamp(1.3rem, 5vw, 1.8rem);
+        padding: 12px 20px;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    /* Video Container */
+    .video-container {
+        padding: 0 10px;
+    }
+    
+    .apc-player {
+        border-radius: 15px;
+    }
+    
+    /* Benefit Cards */
+    .affiliates-benefits {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .benefit-card {
+        padding: 25px 20px;
+        border-radius: 18px;
+    }
+    
+    .benefit-card h3 {
+        font-size: 1.25rem;
+    }
+    
+    .benefit-card p {
+        font-size: 0.95rem;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+        padding: 30px 20px;
+        border-radius: 18px;
+    }
+    
+    .cta-section h3 {
+        font-size: 1.5rem;
+    }
+    
+    .cta-section p {
+        font-size: 1rem;
+    }
+    
+    /* Video Section */
+    .video-section {
+        padding: 50px 0;
+    }
+    
+    /* Bottom Card */
+    .bottom-sections {
+        padding: 50px 0;
+    }
+    
+    .bottom-card {
+        padding: 25px 20px;
+        border-radius: 18px;
+        margin: 0 10px;
+    }
+    
+    .bottom-card::before {
+        height: 3px;
+    }
+    
+    .bottom-card .ceo-avatar {
+        width: 65px;
+        height: 65px;
+    }
+    
+    .bottom-card .ceo-avatar i {
+        font-size: 1.8rem;
+    }
+    
+    .bottom-card .ceo-info h3 {
+        font-size: 1.3rem;
+    }
+    
+    .bottom-card .message-content p {
+        font-size: 1rem;
+    }
+    
+    /* Footer */
+    .footer {
+        padding: 20px 0;
+    }
+    
+    .footer-bottom p {
+        font-size: 0.85rem;
+    }
+}
+
+/* Small Mobile (320px - 479px) */
+@media (max-width: 479px) {
+    :root {
+        --spacing-lg: 1.2rem;
+        --spacing-xl: 1.5rem;
+        --spacing-2xl: 2rem;
+    }
+    
+    .container {
+        padding: 0 12px;
+    }
+    
+    section {
+        padding: 40px 0;
+    }
+    
+    /* Navigation */
+    .nav-brand {
+        gap: 6px;
+    }
+    
+    .logo-icon {
+        width: 35px;
+        height: 35px;
+        border-radius: 8px;
+    }
+    
+    .logo-icon i {
+        font-size: 1rem;
+    }
+    
+    .logo-text .logo-main {
+        font-size: 0.95rem;
+    }
+    
+    .logo-text .logo-sub {
+        font-size: 0.75rem;
+    }
+    
+    .nav-toggle {
+        width: 28px;
+    }
+    
+    .nav-toggle span {
+        height: 2px;
+    }
+    
+    /* Hero */
+    .hero {
+        padding: 90px 0 50px 0;
+    }
+    
+    .hero-title {
+        font-size: clamp(1.5rem, 12vw, 2rem);
+        padding: 8px;
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+        padding: 0 5px;
+    }
+    
+    .hero-description {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    
+    .scroll-indicator {
+        margin-top: 28px;
+    }
+    
+    .scroll-indicator .mouse {
+        width: 22px;
+        height: 38px;
+        border-radius: 11px;
+    }
+    
+    .scroll-indicator .wheel {
+        width: 3px;
+        height: 6px;
+        top: 6px;
+    }
+    
+    /* Section Headers */
+    .section-header {
+        margin-bottom: 30px;
+    }
+    
+    .section-title {
+        font-size: clamp(1.2rem, 5vw, 1.5rem);
+        padding: 10px 15px;
+        border-width: 2px;
+    }
+    
+    .section-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    /* Benefit Cards */
+    .benefit-card {
+        padding: 20px 15px;
+        border-radius: 15px;
+    }
+    
+    .benefit-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .benefit-card p {
+        font-size: 0.85rem;
+        line-height: 1.7;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+        padding: 25px 15px;
+        border-radius: 15px;
+        border-width: 2px;
+    }
+    
+    .cta-section h3 {
+        font-size: 1.25rem;
+    }
+    
+    .cta-section p {
+        font-size: 0.9rem;
+    }
+    
+    /* Bottom Card */
+    .bottom-card {
+        padding: 20px 15px;
+        border-radius: 15px;
+        margin: 0 5px;
+        border-width: 2px;
+    }
+    
+    .bottom-card .ceo-avatar {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .bottom-card .ceo-avatar i {
+        font-size: 1.5rem;
+    }
+    
+    .bottom-card .ceo-info h3 {
+        font-size: 1.1rem;
+    }
+    
+    .bottom-card .ceo-info p {
+        font-size: 0.85rem;
+    }
+    
+    .bottom-card .message-content p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+    
+    .bottom-card .cta-link {
+        font-size: 0.9rem;
+    }
+    
+    /* Footer */
+    .footer-bottom p {
+        font-size: 0.75rem;
+        padding: 0 10px;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding: 80px 0 40px 0;
+    }
+    
+    .scroll-indicator {
+        display: none;
+    }
+}
+
+/* Touch Device Improvements */
+@media (hover: none) and (pointer: coarse) {
+    .benefit-card:hover {
+        transform: none;
+    }
+    
+    .benefit-card:active {
+        transform: scale(0.98);
+    }
+    
+    .apc-player:hover {
+        transform: none;
+    }
+    
+    .nav-link,
+    .btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* ============================================
+   ENHANCED NAVBAR & HERO MOBILE STYLES
+   ============================================ */
+
+/* Navigation Toggle */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1001;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--bright-white);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Mobile Navigation */
+@media (max-width: 900px) {
+    .nav-toggle {
+        display: flex;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(15px);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        gap: 0;
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 999;
+    }
+    
+    .nav-menu.active {
+        transform: translateX(0);
+    }
+    
+    .nav-menu li {
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .nav-link {
+        display: block;
+        padding: 15px 10px;
+        font-size: 1rem;
+        width: 100%;
+    }
+    
+    .nav-item-dropdown {
+        position: relative;
+    }
+    
+    .dropdown-toggle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .dropdown-menu {
+        position: static;
+        background: transparent;
+        box-shadow: none;
+        padding-left: 20px;
+        display: none;
+    }
+    
+    .dropdown-menu.show {
+        display: block;
+    }
+    
+    .navbar .container {
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        padding: 0;
+    }
+    
+    .navbar .container {
+        padding: 12px 15px;
+    }
+    
+    .nav-brand {
+        gap: 8px;
+    }
+    
+    .logo-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+    }
+    
+    .logo-icon i {
+        font-size: 1.1rem;
+    }
+    
+    .logo-text .logo-main {
+        font-size: 1rem;
+    }
+    
+    .logo-text .logo-sub {
+        font-size: 0.6rem;
+    }
+    
+    .nav-toggle {
+        padding: 3px;
+    }
+    
+    .nav-toggle span {
+        width: 22px;
+        height: 2.5px;
+    }
+    
+    /* Hero Mobile */
+    .hero {
+        padding-top: 80px;
+        min-height: auto;
+    }
+    
+    .hero-content {
+        padding: 0 15px;
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: clamp(1.6rem, 10vw, 2.2rem);
+        white-space: normal;
+        word-wrap: break-word;
+        line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(0.95rem, 4vw, 1.2rem);
+        white-space: normal;
+        word-wrap: break-word;
+        line-height: 1.4;
+    }
+    
+    .hero-description {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    
+    .scroll-indicator {
+        margin-top: 30px;
+    }
+}
+
+/* ============================================
+   BENEFITS BOX & CTA BUTTON STYLES
+   ============================================ */
+
+/* Benefits Box - Black container with list */
+.benefits-box {
+    background: #000000;
+    padding: 50px 60px;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.benefits-box h4 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 700px;
+    text-align: left;
+}
+
+.benefits-list li {
+    color: #ffffff;
+    font-size: 1rem;
+    padding: 12px 0;
+    padding-left: 30px;
+    position: relative;
+    font-weight: 600;
+}
+
+.benefits-list li i {
+    color: #ffffff;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+}
+
+/* CTA Button Wrapper */
+.cta-button-wrapper {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Red CTA Button */
+.btn-cta-red {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #c00000;
+    color: #ffffff;
+    padding: 18px 50px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.3rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(192, 0, 0, 0.4);
+}
+
+.btn-cta-red:hover {
+    background: #a00000;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(192, 0, 0, 0.5);
+}
+
+/* Responsive adjustments for benefits box */
+@media (max-width: 768px) {
+    .benefits-box {
+        padding: 35px 25px;
+        border-radius: 16px;
+    }
+    
+    .benefits-box h4 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .benefits-list li {
+        font-size: 1rem;
+        padding: 10px 0;
+        padding-left: 25px;
+    }
+    
+    .btn-cta-red {
+        padding: 15px 35px;
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .benefits-box {
+        padding: 25px 20px;
+        border-radius: 14px;
+    }
+    
+    .benefits-box h4 {
+        font-size: 1.25rem;
+    }
+    
+    .benefits-list li {
+        font-size: 0.9rem;
+        padding-left: 22px;
+    }
+    
+    .btn-cta-red {
+        padding: 12px 28px;
+        font-size: 1rem;
+    }
+}
+
+/* ============================================
+   ENHANCED ANIMATIONS - ADDED BELOW
+   ============================================ */
+
+/* Smooth Hero Entrance Animations - Slower and more delay */
+.hero-title {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: heroFadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    will-change: opacity, transform;
+}
+
+.hero-subtitle {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: heroFadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+    will-change: opacity, transform;
+}
+
+.hero-description {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: heroFadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.7s forwards;
+    will-change: opacity, transform;
+}
+
+.scroll-indicator {
+    opacity: 0;
+    animation: heroFadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s forwards;
+    will-change: opacity, transform;
+}
+
+@keyframes heroFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Smooth Scroll Animations - Start visible, animate when ready */
+.animate-on-scroll {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
+}
+
+.js-loaded .animate-on-scroll:not(.animated) {
+    opacity: 0;
+    transform: translateY(25px);
+}
+
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Slide In from Left */
+.animate-left {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
+}
+
+.js-loaded .animate-left:not(.animated) {
+    opacity: 0;
+    transform: translateX(-35px);
+}
+
+.animate-left.animated {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Slide In from Right */
+.animate-right {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
+}
+
+.js-loaded .animate-right:not(.animated) {
+    opacity: 0;
+    transform: translateX(35px);
+}
+
+.animate-right.animated {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Scale In Animation */
+.animate-scale {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
+}
+
+.js-loaded .animate-scale:not(.animated) {
+    opacity: 0;
+    transform: scale(0.97);
+}
+
+.animate-scale.animated {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Enhanced Button Hover Animations */
+.btn-cta-red {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-cta-red::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.btn-cta-red:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-cta-red:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(192, 0, 0, 0.5);
+}
+
+.btn-cta-red:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+/* Pulse Animation for CTA Button */
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 8px 25px rgba(192, 0, 0, 0.4);
+    }
+    50% {
+        box-shadow: 0 8px 35px rgba(192, 0, 0, 0.7), 0 0 20px rgba(192, 0, 0, 0.3);
+    }
+}
+
+.cta-button-wrapper .btn-cta-red {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.cta-button-wrapper .btn-cta-red:hover {
+    animation: none;
+}
+
+/* Benefit Card Hover Effects */
+.benefit-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.benefit-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Video Container Enhancements */
+.video-container.animate-on-scroll.animated {
+    animation: videoPulse 0.6s ease;
+}
+
+@keyframes videoPulse {
+    0% { transform: scale(0.95); }
+    50% { transform: scale(1.01); }
+    100% { transform: scale(1); }
+}
+
+/* Logo Animation */
+.nav-brand:hover .logo-icon {
+    animation: logoWiggle 0.5s ease;
+}
+
+@keyframes logoWiggle {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(-10deg) scale(1.1); }
+    75% { transform: rotate(10deg) scale(1.1); }
+}
+
+/* Section Title Shimmer Animation */
+.section-title {
+    position: relative;
+    overflow: hidden;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+
+/* Smooth Benefits Box Animation */
+.benefits-box {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
+}
+
+.js-loaded .benefits-box:not(.animated) {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.benefits-box.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Smooth Benefits List Item Animations */
+.benefits-list li {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
+}
+
+.js-loaded .benefits-box:not(.animated) .benefits-list li {
+    opacity: 0;
+    transform: translateX(-15px);
+}
+
+.benefits-box.animated .benefits-list li:nth-child(1) { transition-delay: 0.1s; }
+.benefits-box.animated .benefits-list li:nth-child(2) { transition-delay: 0.2s; }
+.benefits-box.animated .benefits-list li:nth-child(3) { transition-delay: 0.3s; }
+.benefits-box.animated .benefits-list li:nth-child(4) { transition-delay: 0.4s; }
+.benefits-box.animated .benefits-list li:nth-child(5) { transition-delay: 0.5s; }
+
+/* Smooth Checkmark Animation */
+.benefits-list li i {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.js-loaded .benefits-box:not(.animated) .benefits-list li i {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.5);
+}
+
+.benefits-box.animated .benefits-list li:nth-child(1) i { transition-delay: 0.2s; }
+.benefits-box.animated .benefits-list li:nth-child(2) i { transition-delay: 0.3s; }
+.benefits-box.animated .benefits-list li:nth-child(3) i { transition-delay: 0.4s; }
+.benefits-box.animated .benefits-list li:nth-child(4) i { transition-delay: 0.5s; }
+.benefits-box.animated .benefits-list li:nth-child(5) i { transition-delay: 0.6s; }
+
+/* Staggered Benefit Cards Animation */
+.benefit-card.animate-on-scroll:nth-child(1) { transition-delay: 0s; }
+.benefit-card.animate-on-scroll:nth-child(2) { transition-delay: 0.15s; }
+.benefit-card.animate-on-scroll:nth-child(3) { transition-delay: 0.3s; }
+
+/* CTA Section Animation */
+.cta-section.animate-on-scroll {
+    transition: all 0.8s ease;
+}
+
+/* Footer - Always visible */
+.footer {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Nav Link Hover Effect */
+.nav-link {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--bright-red);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 80%;
+}
+
+/* Big Play Button Pulse */
+.apc-big-play {
+    animation: playPulse 2s ease-in-out infinite;
+}
+
+@keyframes playPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.apc-player:hover .apc-big-play {
+    animation: none;
+    transform: scale(1.1);
+}
+
+/* Scroll Indicator Bounce */
+.scroll-indicator .mouse {
+    animation: mouseBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes mouseBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Mobile Animation Adjustments */
+@media (max-width: 768px) {
+    .animate-on-scroll,
+    .animate-left,
+    .animate-right,
+    .animate-scale {
+        transition-duration: 0.4s;
+    }
+    
+    .hero-title,
+    .hero-subtitle,
+    .hero-description {
+        animation-duration: 0.5s;
+    }
+}
+
+.margin-top-sm {
+    margin-top: 50px;
+}
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+      <div class="container">
+        <div class="nav-brand">
+          <div class="logo-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <div class="logo-text">
+            <span class="logo-main">AI Powered</span>
+            <span class="logo-sub">Community</span>
+          </div>
+        </div>
+        <button class="nav-toggle" id="navToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title">AI Powered Community</h1>
+          <p class="hero-subtitle">
+            The revolutionary solution to economic inequality in the age of AI
+          </p>
+          <p class="hero-description">
+            Don't get left behind – join the community that's building a new
+            economy where everyone wins, not just the wealthy few.
+          </p>
+
+          <!-- Scroll Down Indicator -->
+          <div class="scroll-indicator">
+            <span>Scroll Down</span>
+            <div class="mouse">
+              <div class="wheel"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <h2 class="section-title">Home of The Flourishing Economy</h2>
+          <p class="section-subtitle">
+            A blueprint for Human and AI collaborative prosperity – building an
+            economy where everyone shares in the benefits
+          </p>
+        </div>
+
+        <!-- Custom Video Player #1 -->
+        <div class="video-container animate-on-scroll">
+          <div class="apc-player" id="apcPlayer1">
+            <div class="apc-seek-flash left" id="flashLeft1">
+              <i class="fas fa-backward"></i>
+            </div>
+            <div class="apc-seek-flash right" id="flashRight1">
+              <i class="fas fa-forward"></i>
+            </div>
+            <div class="apc-spinner" id="apcSpinner1">
+              <div class="apc-spinner-ring"></div>
+            </div>
+            <video id="apcVideo1">
+              <source src="https://assets.cdn.filesafe.space/lEPLrT4jOOd6cuKGv0Vd/media/69d149188df5723450a4aa12.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div class="apc-play-overlay" id="apcOverlay1">
+              <div class="apc-big-play"><i class="fas fa-play"></i></div>
+            </div>
+            <div class="apc-controls" id="apcControls1">
+              <div class="apc-progress-wrap" id="apcSeek1">
+                <div class="apc-progress-bg">
+                  <div class="apc-buffered" id="apcBuffered1"></div>
+                  <div class="apc-played" id="apcPlayed1"></div>
+                </div>
+                <div class="apc-progress-thumb" id="apcThumb1"></div>
+              </div>
+              <div class="apc-bottom">
+                <button class="apc-btn" id="apcPlayBtn1">
+                  <i class="fas fa-play" id="apcPlayIcon1"></i>
+                </button>
+                <div class="apc-volume-group">
+                  <button class="apc-btn" id="apcMuteBtn1">
+                    <i class="fas fa-volume-high" id="apcVolIcon1"></i>
+                  </button>
+                  <input
+                    type="range"
+                    class="apc-volume-slider"
+                    id="apcVol1"
+                    min="0"
+                    max="1"
+                    step="0.02"
+                    value="1"
+                  />
+                </div>
+                <div class="apc-time">
+                  <span id="apcCur1">0:00</span> /
+                  <span id="apcDur1">0:00</span>
+                </div>
+                <div class="apc-spacer"></div>
+                <button class="apc-speed" id="apcSpeedBtn1">1×</button>
+                <div class="apc-speed-menu" id="apcSpeedMenu1">
+                  <div class="apc-speed-opt" data-speed="0.5">0.5×</div>
+                  <div class="apc-speed-opt" data-speed="0.75">0.75×</div>
+                  <div class="apc-speed-opt active" data-speed="1">1×</div>
+                  <div class="apc-speed-opt" data-speed="1.25">1.25×</div>
+                  <div class="apc-speed-opt" data-speed="1.5">1.5×</div>
+                  <div class="apc-speed-opt" data-speed="2">2×</div>
+                </div>
+                <button class="apc-btn" id="apcFsBtn1">
+                  <i class="fas fa-expand" id="apcFsIcon1"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Affiliates Program Section -->
+    <section class="affiliates" id="affiliates">
+      <div class="container">
+        <div class="affiliates-header">
+          <h2 class="section-title">The Flourishing Affiliates Program</h2>
+        </div>
+
+        <div class="affiliates-content">
+          <div class="affiliates-benefits animate-on-scroll">
+            <div class="benefit-card animate-on-scroll">
+              <h3>Turnkey Marketing Program</h3>
+              <p>
+                The AI Powered Community, a non-profit corporation, provides
+                every member of the Marketing Team a complete turnkey marketing
+                program. The program is completely operated by your Robo, you
+                just need to set up your Facebook account. Complete details are
+                in the affiliate section.
+              </p>
+            </div>
+
+            <div class="benefit-card animate-on-scroll">
+              <h3>Team Support is Essential</h3>
+              <p>
+                It's very important for every Marketing Affiliate to support
+                their team after they join your group. Create an email list and
+                keep in contact with your members on a weekly basis. Keep them
+                informed, they could be a very important part of any of your
+                future ventures.
+              </p>
+            </div>
+
+            <div class="benefit-card animate-on-scroll">
+              <h3>Sustainable Maximum Income</h3>
+              <p>
+                The Flourishing Economy affiliate turnkey program has a maximum
+                income cap of $4000 Monthly, after you reach the maximum, the
+                program will be terminated. To reach the maximum income of
+                $260,000 yearly you can continue the same program with the
+                addition of products to your program.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- Custom Video Player -->
+      <div class="video-container padding-bottom-md animate-on-scroll">
+        <div class="apc-player" id="apcPlayer2">
+          <div class="apc-seek-flash left" id="flashLeft2">
+            <i class="fas fa-backward"></i>
+          </div>
+          <div class="apc-seek-flash right" id="flashRight2">
+            <i class="fas fa-forward"></i>
+          </div>
+          <div class="apc-spinner" id="apcSpinner2">
+            <div class="apc-spinner-ring"></div>
+          </div>
+          <video id="apcVideo2">
+            <source src="https://assets.cdn.filesafe.space/lEPLrT4jOOd6cuKGv0Vd/media/69d14918d2f228ee5ac9945b.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div class="apc-play-overlay" id="apcOverlay2">
+            <div class="apc-big-play"><i class="fas fa-play"></i></div>
+          </div>
+          <div class="apc-controls" id="apcControls2">
+            <div class="apc-progress-wrap" id="apcSeek2">
+              <div class="apc-progress-bg">
+                <div class="apc-buffered" id="apcBuffered2"></div>
+                <div class="apc-played" id="apcPlayed2"></div>
+              </div>
+              <div class="apc-progress-thumb" id="apcThumb2"></div>
+            </div>
+            <div class="apc-bottom">
+              <button class="apc-btn" id="apcPlayBtn2">
+                <i class="fas fa-play" id="apcPlayIcon2"></i>
+              </button>
+              <div class="apc-volume-group">
+                <button class="apc-btn" id="apcMuteBtn2">
+                  <i class="fas fa-volume-high" id="apcVolIcon2"></i>
+                </button>
+                <input
+                  type="range"
+                  class="apc-volume-slider"
+                  id="apcVol2"
+                  min="0"
+                  max="1"
+                  step="0.02"
+                  value="1"
+                />
+              </div>
+              <div class="apc-time">
+                <span id="apcCur2">0:00</span> / <span id="apcDur2">0:00</span>
+              </div>
+              <div class="apc-spacer"></div>
+              <button class="apc-speed" id="apcSpeedBtn2">1×</button>
+              <div class="apc-speed-menu" id="apcSpeedMenu2">
+                <div class="apc-speed-opt" data-speed="0.5">0.5×</div>
+                <div class="apc-speed-opt" data-speed="0.75">0.75×</div>
+                <div class="apc-speed-opt active" data-speed="1">1×</div>
+                <div class="apc-speed-opt" data-speed="1.25">1.25×</div>
+                <div class="apc-speed-opt" data-speed="1.5">1.5×</div>
+                <div class="apc-speed-opt" data-speed="2">2×</div>
+              </div>
+              <button class="apc-btn" id="apcFsBtn2">
+                <i class="fas fa-expand" id="apcFsIcon2"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="container">
+      <div class="padding-top-sm padding-bottom-xs">
+        <div class="cta-section animate-on-scroll">
+          <h3>Experience the Power of AI Collaboration</h3>
+          <p>
+            Join thousands of members already benefiting from the Human
+            Partnership with the AI Powered Economy
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section" id="video">
+      <div class="container">
+        <!-- Custom Video Player -->
+        <div class="video-container animate-on-scroll">
+          <div class="apc-player" id="apcPlayer3">
+            <div class="apc-seek-flash left" id="flashLeft3">
+              <i class="fas fa-backward"></i>
+            </div>
+            <div class="apc-seek-flash right" id="flashRight3">
+              <i class="fas fa-forward"></i>
+            </div>
+            <div class="apc-spinner" id="apcSpinner3">
+              <div class="apc-spinner-ring"></div>
+            </div>
+            <video id="apcVideo3">
+              <source src="https://assets.cdn.filesafe.space/lEPLrT4jOOd6cuKGv0Vd/media/69d149184cde4bbc2aab01d6.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div class="apc-play-overlay" id="apcOverlay3">
+              <div class="apc-big-play"><i class="fas fa-play"></i></div>
+            </div>
+            <div class="apc-controls" id="apcControls3">
+              <div class="apc-progress-wrap" id="apcSeek3">
+                <div class="apc-progress-bg">
+                  <div class="apc-buffered" id="apcBuffered3"></div>
+                  <div class="apc-played" id="apcPlayed3"></div>
+                </div>
+                <div class="apc-progress-thumb" id="apcThumb3"></div>
+              </div>
+              <div class="apc-bottom">
+                <button class="apc-btn" id="apcPlayBtn3">
+                  <i class="fas fa-play" id="apcPlayIcon3"></i>
+                </button>
+                <div class="apc-volume-group">
+                  <button class="apc-btn" id="apcMuteBtn3">
+                    <i class="fas fa-volume-high" id="apcVolIcon3"></i>
+                  </button>
+                  <input
+                    type="range"
+                    class="apc-volume-slider"
+                    id="apcVol3"
+                    min="0"
+                    max="1"
+                    step="0.02"
+                    value="1"
+                  />
+                </div>
+                <div class="apc-time">
+                  <span id="apcCur3">0:00</span> /
+                  <span id="apcDur3">0:00</span>
+                </div>
+                <div class="apc-spacer"></div>
+                <button class="apc-speed" id="apcSpeedBtn3">1×</button>
+                <div class="apc-speed-menu" id="apcSpeedMenu3">
+                  <div class="apc-speed-opt" data-speed="0.5">0.5×</div>
+                  <div class="apc-speed-opt" data-speed="0.75">0.75×</div>
+                  <div class="apc-speed-opt active" data-speed="1">1×</div>
+                  <div class="apc-speed-opt" data-speed="1.25">1.25×</div>
+                  <div class="apc-speed-opt" data-speed="1.5">1.5×</div>
+                  <div class="apc-speed-opt" data-speed="2">2×</div>
+                </div>
+                <button class="apc-btn" id="apcFsBtn3">
+                  <i class="fas fa-expand" id="apcFsIcon3"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="container">
+      <div class="padding-top-xs padding-bottom-xs">
+        <div class="cta-section animate-on-scroll">
+          <h3>Ready to Transform Your Future?</h3>
+          <p>
+            Don't let AI leave you behind. Join AI Powered Community today and become part of the community that's building wealth, health, and happiness in the age of artificial intelligence.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container padding-x-max">
+      <div class="padding-top-xxs padding-bottom-sm">
+        <div class="benefits-box animate-on-scroll">
+          <h4>What Happens When You Join:</h4>
+          <ul class="benefits-list">
+            <li><i class="fas fa-check"></i> Immediate access to your personal AI RoboBullet List 2</li>
+            <li><i class="fas fa-check"></i> Complete entertainment and health programs activated</li>
+            <li><i class="fas fa-check"></i> Turn-key income system ready to launch</li>
+            <li><i class="fas fa-check"></i> Access to AI-powered investment opportunities</li>
+            <li><i class="fas fa-check"></i> Community support and ongoing training</li>
+          </ul>
+        </div>
+        <div class="cta-button-wrapper animate-on-scroll">
+          <a href="https://aipoweredcommunity.pro/choose-your-country" class="btn-cta-red btn-large">Join Now - 30 days free trial!</a>
+        </div>
+        <p class="padding-top-xs center-note-text">Don't wait – the AI revolution is happening with or without you.</p>
+        <p class="padding-top-xxs center-bold-text">Choose to be part of the solution.</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer margin-top-sm">
+      <div class="container">
+        <div class="footer-bottom">
+          <p>
+            &copy; 2026 AI Powered Community. All rights reserved. Building The
+            Flourishing Economy.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
+
+const navToggle = document.getElementById('navToggle');
+const navMenu   = document.getElementById('navMenu');
+
+navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    const spans = navToggle.querySelectorAll('span');
+    if (navMenu.classList.contains('active')) {
+        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+        spans[1].style.opacity   = '0';
+        spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+    } else {
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity   = '1';
+        spans[2].style.transform = 'none';
+    }
+});
+
+const navLinks = document.querySelectorAll('.nav-link');
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        const spans = navToggle.querySelectorAll('span');
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity   = '1';
+        spans[2].style.transform = 'none';
+    });
+});
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && href !== '') {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                const offsetTop = target.offsetTop - 80;
+                window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+            }
+        }
+    });
+});
+
+// ============================================
+// ENHANCED SCROLL ANIMATIONS
+// ============================================
+
+// Scroll animation observer with enhanced options
+const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -50px 0px',
+    threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+            
+            // Special handling for benefits box to trigger list animations
+            if (entry.target.classList.contains('benefits-box')) {
+                entry.target.classList.add('animated');
+            }
+            
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+// Initialize animations on DOM load
+document.addEventListener('DOMContentLoaded', () => {
+    // Observe all elements with animate-on-scroll class
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+    
+    // Add animation classes to elements that need them
+    const videoContainers = document.querySelectorAll('.video-container:not(.animate-on-scroll)');
+    videoContainers.forEach(el => {
+        el.classList.add('animate-on-scroll');
+        observer.observe(el);
+    });
+});
+
+// Add enhanced particles to hero
+let particlesInitialized = false;
+
+document.addEventListener('DOMContentLoaded', () => {
+    const hero = document.querySelector('.hero');
+    if (hero && !particlesInitialized) {
+        particlesInitialized = true;
+        const particlesContainer = document.createElement('div');
+        particlesContainer.className = 'hero-particles';
+        
+        for (let i = 0; i < 15; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * 5}s`;
+            particle.style.animationDuration = `${8 + Math.random() * 12}s`;
+            particlesContainer.appendChild(particle);
+        }
+        
+        hero.appendChild(particlesContainer);
+    }
+});
+
+// Add js-loaded class for smoother animation handling
+window.addEventListener('load', () => {
+    document.body.classList.add('js-loaded');
+});
+
+// Also add it immediately if already loaded
+if (document.readyState === 'complete') {
+    document.body.classList.add('js-loaded');
+}
+
+// Parallax effect on scroll (subtle)
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const hero = document.querySelector('.hero');
+    if (hero && scrolled < window.innerHeight) {
+        hero.style.backgroundPositionY = `${scrolled * 0.3}px`;
+    }
+});
+
+// Scroll indicator click to scroll down
+const scrollIndicator = document.querySelector('.scroll-indicator');
+if (scrollIndicator) {
+    scrollIndicator.addEventListener('click', () => {
+        const aboutSection = document.getElementById('about');
+        if (aboutSection) {
+            const offsetTop = aboutSection.offsetTop - 80;
+            window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+        }
+    });
+}
+
+
+function initialisePlayer(suffix) {
+
+    const player    = document.getElementById('apcPlayer'   + suffix);
+    const video     = document.getElementById('apcVideo'    + suffix);
+    const overlay   = document.getElementById('apcOverlay'  + suffix);
+    const playBtn   = document.getElementById('apcPlayBtn'  + suffix);
+    const playIcon  = document.getElementById('apcPlayIcon' + suffix);
+    const muteBtn   = document.getElementById('apcMuteBtn'  + suffix);
+    const volIcon   = document.getElementById('apcVolIcon'  + suffix);
+    const volSlider = document.getElementById('apcVol'      + suffix);
+    const seekBar   = document.getElementById('apcSeek'     + suffix);
+    const played    = document.getElementById('apcPlayed'   + suffix);
+    const buffered  = document.getElementById('apcBuffered' + suffix);
+    const thumb     = document.getElementById('apcThumb'    + suffix);
+    const curEl     = document.getElementById('apcCur'      + suffix);
+    const durEl     = document.getElementById('apcDur'      + suffix);
+    const fsBtn     = document.getElementById('apcFsBtn'    + suffix);
+    const fsIcon    = document.getElementById('apcFsIcon'   + suffix);
+    const spinner   = document.getElementById('apcSpinner'  + suffix);
+    const speedBtn  = document.getElementById('apcSpeedBtn' + suffix);
+    const speedMenu = document.getElementById('apcSpeedMenu'+ suffix);
+    const flashL    = document.getElementById('flashLeft'   + suffix);
+    const flashR    = document.getElementById('flashRight'  + suffix);
+
+    if (!player || !video) return;
+
+    let idleTimer, dragging = false;
+
+    // ── Helpers ──────────────────────────────
+    const fmt = s => {
+        s = Math.floor(s || 0);
+        const m = Math.floor(s / 60), sec = s % 60;
+        return `${m}:${sec.toString().padStart(2, '0')}`;
+    };
+
+    const setProgress = pct => {
+        played.style.width = pct + '%';
+        thumb.style.left   = pct + '%';
+    };
+
+    const showFlash = el => {
+        el.classList.add('show');
+        setTimeout(() => el.classList.remove('show'), 500);
+    };
+
+    // ── Play / Pause ─────────────────────────
+    const togglePlay = () => video.paused ? video.play() : video.pause();
+
+    video.addEventListener('play', () => {
+        playIcon.className = 'fas fa-pause';
+        overlay.classList.add('hidden');
+        resetIdleTimer();
+    });
+
+    video.addEventListener('pause', () => {
+        playIcon.className = 'fas fa-play';
+        player.classList.remove('idle');
+        clearTimeout(idleTimer);
+        if (video.ended) overlay.classList.remove('hidden');
+    });
+
+    video.addEventListener('ended', () => {
+        overlay.classList.remove('hidden');
+        player.classList.remove('idle');
+    });
+
+    playBtn.addEventListener('click', e => { e.stopPropagation(); togglePlay(); });
+    overlay.addEventListener('click', togglePlay);
+    video.addEventListener('click',   togglePlay);
+
+    // ── Time update ──────────────────────────
+    video.addEventListener('timeupdate', () => {
+        if (dragging) return;
+        const pct = video.duration ? (video.currentTime / video.duration) * 100 : 0;
+        setProgress(pct);
+        curEl.textContent = fmt(video.currentTime);
+    });
+
+    video.addEventListener('loadedmetadata', () => {
+        durEl.textContent = fmt(video.duration);
+    });
+
+    // ── Buffered ─────────────────────────────
+    video.addEventListener('progress', () => {
+        if (video.duration && video.buffered.length) {
+            const pct = (video.buffered.end(video.buffered.length - 1) / video.duration) * 100;
+            buffered.style.width = pct + '%';
+        }
+    });
+
+    // ── Seek bar ─────────────────────────────
+    const seekTo = e => {
+        const rect = seekBar.getBoundingClientRect();
+        const pct  = Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1);
+        video.currentTime = pct * video.duration;
+        setProgress(pct * 100);
+    };
+
+    seekBar.addEventListener('mousedown', e => {
+        dragging = true;
+        thumb.classList.add('dragging');
+        seekTo(e);
+    });
+
+    // Touch support for seek
+    seekBar.addEventListener('touchstart', e => {
+        dragging = true;
+        thumb.classList.add('dragging');
+        seekTo(e.touches[0]);
+    }, { passive: true });
+
+    document.addEventListener('mousemove', e => { if (dragging) seekTo(e); });
+    document.addEventListener('mouseup',   () => {
+        if (dragging) { dragging = false; thumb.classList.remove('dragging'); }
+    });
+
+    document.addEventListener('touchmove', e => { if (dragging) seekTo(e.touches[0]); }, { passive: true });
+    document.addEventListener('touchend',  () => {
+        if (dragging) { dragging = false; thumb.classList.remove('dragging'); }
+    });
+
+    seekBar.addEventListener('click', seekTo);
+
+    // ── Volume ───────────────────────────────
+    const updateVolIcon = () => {
+        const v = video.volume;
+        volIcon.className = (video.muted || v === 0)
+            ? 'fas fa-volume-xmark'
+            : v < 0.5 ? 'fas fa-volume-low' : 'fas fa-volume-high';
+    };
+
+    volSlider.addEventListener('input', () => {
+        video.volume = parseFloat(volSlider.value);
+        video.muted  = video.volume === 0;
+        updateVolIcon();
+    });
+
+    muteBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        video.muted      = !video.muted;
+        volSlider.value  = video.muted ? 0 : video.volume;
+        updateVolIcon();
+    });
+
+    // ── Playback speed ───────────────────────
+    speedBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        speedMenu.classList.toggle('open');
+    });
+
+    speedMenu.querySelectorAll('.apc-speed-opt').forEach(opt => {
+        opt.addEventListener('click', e => {
+            e.stopPropagation();
+            const spd = parseFloat(opt.dataset.speed);
+            video.playbackRate    = spd;
+            speedBtn.textContent  = spd === 1 ? '1×' : spd + '×';
+            speedMenu.querySelectorAll('.apc-speed-opt').forEach(o => o.classList.remove('active'));
+            opt.classList.add('active');
+            speedMenu.classList.remove('open');
+        });
+    });
+
+    // Close speed menu when clicking elsewhere
+    document.addEventListener('click', () => speedMenu.classList.remove('open'));
+
+    // ── Fullscreen ───────────────────────────
+    fsBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        if (!document.fullscreenElement) {
+            player.requestFullscreen?.();
+        } else {
+            document.exitFullscreen?.();
+        }
+    });
+
+    document.addEventListener('fullscreenchange', () => {
+        // Only update icon for the player that triggered fullscreen
+        if (document.fullscreenElement === player) {
+            fsIcon.className = 'fas fa-compress';
+        } else if (!document.fullscreenElement) {
+            fsIcon.className = 'fas fa-expand';
+        }
+    });
+
+    // ── Keyboard shortcuts (active player only) ──
+    player.addEventListener('keydown', e => {
+        switch (e.code) {
+            case 'Space':       e.preventDefault(); togglePlay(); break;
+            case 'ArrowRight':  video.currentTime += 10; showFlash(flashR); break;
+            case 'ArrowLeft':   video.currentTime -= 10; showFlash(flashL); break;
+            case 'ArrowUp':     video.volume = Math.min(1, video.volume + 0.1); volSlider.value = video.volume; updateVolIcon(); break;
+            case 'ArrowDown':   video.volume = Math.max(0, video.volume - 0.1); volSlider.value = video.volume; updateVolIcon(); break;
+            case 'KeyF':        fsBtn.click(); break;
+            case 'KeyM':        muteBtn.click(); break;
+        }
+    });
+
+    // Make player focusable for keyboard
+    player.setAttribute('tabindex', '0');
+
+    // ── Idle controls hiding ──────────────────
+    const resetIdleTimer = () => {
+        player.classList.remove('idle');
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(() => {
+            if (!video.paused) player.classList.add('idle');
+        }, 2800);
+    };
+
+    player.addEventListener('mousemove',  resetIdleTimer);
+    player.addEventListener('touchstart', resetIdleTimer, { passive: true });
+    player.addEventListener('mouseleave', () => {
+        if (!video.paused) player.classList.add('idle');
+    });
+
+    // ── Spinner ───────────────────────────────
+    video.addEventListener('waiting', () => spinner.classList.add('visible'));
+    video.addEventListener('canplay', () => spinner.classList.remove('visible'));
+}
+
+// Initialise both player instances
+initialisePlayer('1');
+initialisePlayer('2');
+initialisePlayer('3');
+    </script>
+  </body>
+</html>
