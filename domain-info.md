@@ -17,6 +17,7 @@
 |---|---|---|---|
 | A | `@` | `145.79.0.166` | 14400 |
 | A | `www` | `145.79.0.166` | 14400 |
+| A | `partner` | `145.79.0.166` | 14400 |
 | CNAME | `partners` | `sites.ludicrous.cloud` | 14400 |
 
 ---
@@ -58,7 +59,7 @@ Config file: `/etc/nginx/sites-available/partners-aipowered`
 ```nginx
 server {
     listen 80;
-    server_name partners.aipoweredcommunity.pro;
+    server_name partner.aipoweredcommunity.pro;
 
     location / {
         proxy_pass http://localhost:7010;
@@ -72,14 +73,82 @@ server {
 
 ---
 
+## How to Add a New Subdomain (Step by Step)
+
+### Step 1 — Add DNS A Record in Hostinger
+
+Go to: hpanel.hostinger.com → aipoweredcommunity.pro → DNS / Nameservers → Add Record
+
+| Type | Name | Value | TTL |
+|---|---|---|---|
+| A | `subdomain-name` | `145.79.0.166` | 14400 |
+
+Wait 5-15 minutes, then verify:
+
+```bash
+nslookup subdomain-name.aipoweredcommunity.pro 8.8.8.8
+```
+
+### Step 2 — Create Nginx Config on VPS
+
+```bash
+sudo nano /etc/nginx/sites-available/project-name
+```
+
+Paste:
+
+```nginx
+server {
+    listen 80;
+    server_name subdomain-name.aipoweredcommunity.pro;
+
+    location / {
+        proxy_pass http://localhost:PORT;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+### Step 3 — Enable and Reload
+
+```bash
+sudo ln -s /etc/nginx/sites-available/project-name /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+### Step 4 — Add HTTPS
+
+```bash
+sudo certbot --nginx -d subdomain-name.aipoweredcommunity.pro
+```
+
+### Quick Reference — Adding a New Project
+
+```bash
+# 1. DNS (Hostinger) — add A record
+# 2. VPS — create nginx config
+sudo nano /etc/nginx/sites-available/newproject
+# 3. Enable
+sudo ln -s /etc/nginx/sites-available/newproject /etc/nginx/sites-enabled/
+sudo nginx -t && sudo systemctl reload nginx
+# 4. HTTPS
+sudo certbot --nginx -d newproject.aipoweredcommunity.pro
+```
+
+---
+
 ## Enable HTTPS (SSL)
 
 ```bash
 # AI Powered Community
 sudo certbot --nginx -d aipoweredcommunity.pro -d www.aipoweredcommunity.pro
 
-# Partners (add DNS A record for partners subdomain first)
-sudo certbot --nginx -d partners.aipoweredcommunity.pro
+# Partners
+sudo certbot --nginx -d partner.aipoweredcommunity.pro
 ```
 
 ---
