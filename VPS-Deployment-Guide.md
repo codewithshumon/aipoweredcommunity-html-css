@@ -109,7 +109,50 @@ sudo systemctl reload nginx
 
 ---
 
-## Step 6 — Add a New Project (Quick Reference)
+## Step 6 — Enable HTTPS (SSL) — Required for `https://`
+
+After Step 5 your sites will only be on **HTTP**. You MUST do this step to get the 🔒 padlock.
+
+```bash
+# Install Certbot
+sudo apt install certbot python3-certbot-nginx -y
+
+# Generate free SSL certificate for EACH site
+sudo certbot --nginx -d aipoweredcommunity.com -d www.aipoweredcommunity.com
+sudo certbot --nginx -d project2.com -d www.project2.com
+sudo certbot --nginx -d project3.com -d www.project3.com
+```
+
+> **Certbot will:**
+> - Generate a free SSL certificate from Let's Encrypt
+> - Auto-modify your Nginx configs to listen on port 443 (HTTPS)
+> - Auto-redirect HTTP → HTTPS
+> - Auto-renew every 90 days (a cron job is created automatically)
+>
+> **Before running this:** Make sure your domain DNS is already pointing to your VPS IP.
+
+### Verify auto-renewal is working
+
+```bash
+sudo certbot renew --dry-run
+```
+
+If this succeeds, your SSL will auto-renew forever. No manual work needed.
+
+---
+
+## Step 7 — Enable Firewall (Security)
+
+```bash
+# Allow SSH, HTTP, and HTTPS only
+sudo ufw allow OpenSSH
+sudo ufw allow 'Nginx Full'
+sudo ufw enable
+```
+
+---
+
+## Step 8 — Add a New Project (Quick Reference)
 
 ```bash
 mkdir -p /var/www/newproject
@@ -120,35 +163,26 @@ sudo nano /etc/nginx/sites-available/newproject
 sudo ln -s /etc/nginx/sites-available/newproject /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
-```
-
----
-
-## Security Setup (Recommended)
-
-```bash
-# Enable firewall (only allow SSH + HTTP + HTTPS)
-sudo ufw allow OpenSSH
-sudo ufw allow 'Nginx Full'
-sudo ufw enable
-
-# Free SSL for all your sites
-sudo apt install certbot python3-certbot-nginx -y
-sudo certbot --nginx
+# add HTTPS
+sudo certbot --nginx -d newproject.com -d www.newproject.com
 ```
 
 ---
 
 ## Quick Summary
 
-| Step | Command |
-|---|---|
-| SSH in | `ssh root@YOUR_VPS_IP` |
-| Create folders | `mkdir -p /var/www/project-name` |
-| Add HTML | `nano /var/www/project-name/index.html` |
-| Add Nginx config | `nano /etc/nginx/sites-available/project-name` |
-| Enable site | `ln -s .../sites-available/... .../sites-enabled/` |
-| Reload Nginx | `nginx -t && systemctl reload nginx` |
+| Step | What Happens | Command |
+|---|---|---|
+| 1. SSH in | Connect to VPS | `ssh root@YOUR_VPS_IP` |
+| 2. Create folders | Make project directories | `mkdir -p /var/www/project-name` |
+| 3. Add HTML | Put your site files | `nano /var/www/project-name/index.html` |
+| 4. Nginx config | Point domain to folder | `nano /etc/nginx/sites-available/project-name` |
+| 5. Enable site | Activate the config | `ln -s .../sites-available/... .../sites-enabled/` |
+| 6. Reload Nginx | Apply changes | `nginx -t && systemctl reload nginx` |
+| 7. **Add HTTPS** 🔒 | **Free SSL certificate** | `certbot --nginx -d yourdomain.com` |
+| 8. Firewall | Secure the VPS | `ufw allow 'Nginx Full' && ufw enable` |
+
+> ⚠️ **Steps 1-5 = HTTP only.** Step 7 is what gives you HTTPS.
 
 ---
 
