@@ -3,5 +3,5 @@ services:
     image: workshumon/aipoweredcommunity:latest
     container_name: aipoweredcommunity
     ports:
-      - "6000:6000"
+      - "7000:80"
     restart: unless-stopped
